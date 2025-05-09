@@ -1,0 +1,12 @@
+<h2>My Bookings</h2>
+<ul>
+  {% for booking in bookings %}
+    <li>
+      {{ booking.seat.bus.name }} - Seat {{ booking.seat.seat_number }}
+      on {{ booking.seat.bus.date }}
+      [<a href="{% url 'update_booking' booking.id %}">Change Seat</a>]
+    </li>
+  {% empty %}
+    <li>No bookings yet.</li>
+  {% endfor %}
+</ul>

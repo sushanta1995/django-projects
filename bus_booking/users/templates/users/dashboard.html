@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+    <p><a href="/booking/buses/">View Buses</a></p>
+</body>
+</html>

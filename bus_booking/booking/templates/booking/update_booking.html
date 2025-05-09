@@ -1,0 +1,12 @@
+<h2>Update Booking for {{ booking.seat.bus.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for seat in seats %}
+        <label>
+            <input type="radio" name="seat_id" value="{{ seat.id }}">
+            Seat {{ seat.seat_number }}
+        </label><br>
+    {% endfor %}
+    <br>
+    <button type="submit">Update Booking</button>
+</form>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<a href="{% url 'add_employee' %}" class="btn btn-primary mb-2">Add Employee</a>
+<a href="{% url 'export' %}" class="btn btn-secondary mb-2">Export CSV</a>
+<form method="post" enctype="multipart/form-data" action="{% url 'import' %}">
+  {% csrf_token %}
+  <input type="file" name="file" required>
+  <button type="submit" class="btn btn-info">Import CSV</button>
+</form>
+<table class="table table-striped mt-3">
+  <tr><th>Name</th><th>Salary</th><th>Actions</th></tr>
+  {% for emp in employees %}
+  <tr>
+    <td>{{ emp.user.username }}</td>
+    <td>{{ emp.salary }}</td>
+    <td>
+      <a href="{% url 'update_employee' emp.pk %}" class="btn btn-warning btn-sm">Edit</a>
+      <a href="{% url 'delete_employee' emp.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

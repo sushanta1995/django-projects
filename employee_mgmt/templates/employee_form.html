@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {% if user_form %}{{ user_form.as_p }}{% endif %}
+  {{ emp_form.as_p }}
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+{% endblock %}

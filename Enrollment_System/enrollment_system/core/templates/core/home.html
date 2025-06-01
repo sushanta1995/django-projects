@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Available Courses</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Enrolled</th>
+            <th>Total Seats</th>
+            <th>Remaining Seats</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.enrolled_count }}</td>
+            <td>{{ course.total_seats }}</td>
+            <td>{{ course.remaining_seats }}</td>
+            <td>
+                {% if user.is_authenticated and user.user_type == 'student' and course.remaining_seats > 0 %}
+                    <form method="get" action="{% url 'enroll_course' %}" style="display:inline;">
+                        <input type="hidden" name="course_id" value="{{ course.id }}">
+                        <button type="submit" style="background-color:#4CAF50; color:white; border:none; padding:6px 12px; cursor:pointer;">
+                            Enroll
+                        </button>
+                    </form>
+                {% elif course.remaining_seats == 0 %}
+                    <strong style="color:red;">Full</strong>
+                {% else %}
+                    <em>Login as Student</em>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

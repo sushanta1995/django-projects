@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>All Enrollments</h2>
+  <form method="get">
+    <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+    {% for enroll in page_obj %}
+      <li>{{ enroll.student.username }} - {{ enroll.course.name }} - {{ enroll.enrolled_on }}</li>
+    {% endfor %}
+  </ul>
+  <div>
+    {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+  </div>
+{% endblock %}

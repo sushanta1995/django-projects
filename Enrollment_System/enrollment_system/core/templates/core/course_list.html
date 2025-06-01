@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Available Courses</h2>
+  <ul>
+    {% for course in page_obj %}
+      <li>{{ course.name }} - {{ course.code }} - {{ course.credits }} credits</li>
+    {% endfor %}
+  </ul>
+  <div>
+    {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+  </div>
+{% endblock %}

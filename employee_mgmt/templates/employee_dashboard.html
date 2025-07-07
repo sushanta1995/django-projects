@@ -1,7 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>Welcome {{ employee.user.username }}</h2>
-<p><strong>Education:</strong> {{ employee.education_details }}</p>
-<p><strong>Salary:</strong> {{ employee.salary }}</p>
-<p><a href="{% url 'update_employee' employee.pk %}" class="btn btn-primary">Update Your Info</a></p>
-{% endblock %}

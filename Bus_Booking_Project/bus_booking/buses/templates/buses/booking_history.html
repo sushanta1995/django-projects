@@ -1,0 +1,30 @@
+{% extends 'buses/base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">My Bookings</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Bus</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Departure</th>
+        <th>Booked At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ booking.bus.name }}</td>
+        <td>{{ booking.bus.source }}</td>
+        <td>{{ booking.bus.destination }}</td>
+        <td>{{ booking.bus.departure_time }}</td>
+        <td>{{ booking.booking_time }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

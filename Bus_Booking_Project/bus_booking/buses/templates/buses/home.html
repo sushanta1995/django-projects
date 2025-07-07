@@ -1,0 +1,39 @@
+{% extends 'buses/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">Available Buses</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-info">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="row">
+    {% for bus in buses %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ bus.name }}</h5>
+          <p class="card-text"><strong>From:</strong> {{ bus.source }}</p>
+          <p class="card-text"><strong>To:</strong> {{ bus.destination }}</p>
+          <p class="card-text"><strong>Seats:</strong> {{ bus.seats_available }}</p>
+          <p class="card-text"><strong>Departure:</strong> {{ bus.departure_time }}</p>
+
+          {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}?next={% url 'book_bus' bus.id %}" class="btn btn-primary w-100 mb-2">Book Now</a>
+          {% elif not user.is_superuser %}
+            <a href="{% url 'book_bus' bus.id %}" class="btn custom-book-btn w-100 mb-2">Book Now</a>
+          {% endif %}
+
+          {% if user.is_authenticated and user.is_superuser %}
+            <a href="{% url 'update_bus' bus.id %}" class="btn btn-warning mb-2 w-100">Edit</a>
+            <a href="{% url 'delete_bus' bus.id %}" class="btn btn-danger w-100">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
